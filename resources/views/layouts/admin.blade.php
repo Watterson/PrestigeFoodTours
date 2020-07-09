@@ -34,9 +34,9 @@
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-icon ">
-          <img src="{{asset('img/logo-sm.png')}}" alt="Logo" class="img" style="max-height: 60px ">
+          <img src="{{asset('img/logo2.png')}}" alt="Logo" class="img" style="max-height: 70px ">
         </div>
-        <div class="sidebar-brand-text mx-3">Prestige Console</div>
+        <div class="sidebar-brand-text mx-3">Console</div>
       </a>
 
       <!-- Divider -->
@@ -120,7 +120,7 @@
     <div id="content-wrapper" class="d-flex flex-column">
 
       <!-- Main Content -->
-      <div id="content">
+      <div id="content" class="bg-gray-300">
 
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-gray-900 topbar mb-4 static-top shadow">

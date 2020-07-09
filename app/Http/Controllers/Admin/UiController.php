@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 
-class CompetitionController extends Controller
+class UiController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -23,9 +23,29 @@ class CompetitionController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function indexWelcome()
     {
-        return view('console/comp/index');
+        return view('console/ui/welcome/index');
+    }
+
+    public function indexAccount()
+    {
+        return view('console/ui/account/index');
+    }
+
+    public function indexComp()
+    {
+        return view('console/ui/comp/index');
+    }
+
+    public function indexWinners()
+    {
+        return view('console/ui/winner/index');
+    }
+
+    public function indexDraws()
+    {
+        return view('console/ui/draw/index');
     }
 
     public function create()

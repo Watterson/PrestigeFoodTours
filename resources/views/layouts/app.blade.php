@@ -128,7 +128,7 @@
                      <li><a class="facebook" href="{{route('fb')}}"><i class="fa fa-facebook"></i></a></li>
                      <li><a class="twitter" href="{{route('tw')}}"><i class="fa fa-twitter"></i></a></li>
                      <li><a class="instagram" href="{{route('insta')}}"><i class="fa fa-instagram"></i></a></li>
-                     <li><a class="linkedin" href="{{route('link')}}"><i class="fa fa-linkedin"></i></a></li>
+                     <li><a class="linkedin" href="{{route('linkedin')}}"><i class="fa fa-linkedin"></i></a></li>
                    </ul>
                  </div>
                </div>
