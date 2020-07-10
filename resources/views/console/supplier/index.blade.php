@@ -39,7 +39,32 @@
         </div>
         <!-- Card Body -->
         <div class="card-body">
-
+          <table class="table table-sm table-light table-responsive">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Contact</th>
+                <th scope="col">Email</th>
+                <th scope="col">landline</th>
+                <th scope="col">mobile</th>
+                <th scope="col">address</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($suppliers as $key => $supplier)
+              <tr>
+                <th scope="row">{{ ++$key }}</th>
+                <td>{{$supplier->title}}</td>
+                <td>{{$supplier->contact}}</td>
+                <td>{{$supplier->email}}</td>
+                <td>{{$supplier->landline}}</td>
+                <td>{{$supplier->mobile}}</td>
+                <td>{{$supplier->address}}</td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -65,13 +90,13 @@
         </div>
         <!-- Card Body -->
         <div class="card-body">
-          <form method="POST" action="{{ route('login') }}">
+          <form method="POST" action="{{ route('create-supplier') }}">
               @csrf
             <div class=" row">
 
               <div class="col-12">
                 <div class="form-group row">
-                    <label for="title" class="col-lg-4 col-md-5 col-form-label text-md-right">Title</label>
+                    <label for="title" class="col-lg-4 col-md-5 col-form-label text-left">Title</label>
 
                     <div class="col-lg-8 col-md-6">
                         <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required autocomplete="title" autofocus>
@@ -85,10 +110,10 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="description" class="col-lg-4 col-md-5 col-form-label text-md-right">Description</label>
+                    <label for="description" class="col-lg-4 col-md-5 col-form-label text-left">Description</label>
 
                     <div class="col-lg-8 col-md-6">
-                        <textarea id="description" type="text-area" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" required autocomplete="description" rows=3 autofocus></textarea>
+                        <textarea id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" required autocomplete="description" rows=3 autofocus></textarea>
 
                         @error('description')
                             <span class="invalid-feedback" role="alert">
@@ -99,12 +124,12 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="category" class="col-lg-4 col-md-5 col-form-label text-md-right">Category</label>
+                    <label for="contact" class="col-lg-4 col-md-5 col-form-label text-left">Name Of Contact</label>
 
                     <div class="col-lg-8 col-md-6">
-                        <input id="category" type="text" class="form-control @error('category') is-invalid @enderror" name="category" value="{{ old('category') }}" required autocomplete="category" autofocus>
+                        <input id="contact" type="text" class="form-control @error('contact') is-invalid @enderror" name="contact" value="{{ old('contact') }}" required autocomplete="contact" autofocus>
 
-                        @error('category')
+                        @error('contact')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -113,12 +138,51 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="people" class="col-lg-4 col-md-5 col-form-label text-md-right">Group Size</label>
+                    <label for="email" class="col-lg-4 col-md-5 col-form-label text-left">{{ __('E-Mail Address') }}</label>
 
                     <div class="col-lg-8 col-md-6">
-                        <input id="people" type="text" class="form-control @error('people') is-invalid @enderror" name="people" value="{{ old('people') }}" required autocomplete="people" autofocus>
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
-                        @error('people')
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="landline" class="col-lg-4 col-md-5 col-form-label text-left">Landline</label>
+
+                    <div class="col-lg-8 col-md-6">
+                        <input id="landline" type="text" class="form-control @error('landline') is-invalid @enderror" name="landline" value="{{ old('landline') }}" required autocomplete="landline" autofocus>
+
+                        @error('landline')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="mobile" class="col-lg-4 col-md-5 col-form-label text-left">Mobile</label>
+
+                    <div class="col-lg-8 col-md-6">
+                        <input id="mobile" type="text" class="form-control @error('mobile') is-invalid @enderror" name="mobile" value="{{ old('mobile') }}" required autocomplete="mobile" autofocus>
+
+                        @error('mobile')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="address" class="col-lg-4 col-md-5 col-form-label text-left">Address</label>
+
+                    <div class="col-lg-8 col-md-6">
+                        <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address" autofocus>
+
+                        @error('address')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

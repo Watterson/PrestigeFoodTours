@@ -60,6 +60,7 @@ Route::get('/console/competitions/create', 'Admin\CompetitionController@create')
 Route::get('/console/competitions/update', 'Admin\CompetitionController@update')->name('console-comps-update');
 Route::get('/console/competitions/prizes', 'Admin\PrizeController@index')->name('console-comps-prizes');
 Route::get('/console/competitions/suppliers', 'Admin\SupplierController@index')->name('console-comps-suppliers');
+Route::POST('/console/competitions/suppliers', 'Admin\SupplierController@create')->name('create-supplier');
 
 //Orders management
 Route::get('/console/orders', 'Admin\OrderController@index')->name('console-orders');

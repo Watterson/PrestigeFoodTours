@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Supplier;
+use App\Repositories\Admin\SupplierRepo;
 
 
 class SupplierController extends Controller
@@ -25,12 +27,38 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        return view('console/supplier/index');
+        $allSuppliers = Supplier::all();
+
+        return view('console/supplier/index', [
+          'suppliers' =>$allSuppliers,
+        ]);
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        return view('console/supplier/create');
+        $validatedData = $request->validate([
+           'title' => 'required',
+           'description' => 'required',
+           'contact' => 'required',
+           'email' => 'required',
+           'landline' => 'required',
+           'mobile' => 'required',
+           'address' => 'required',
+
+        ]);
+        $supplier = new Supplier;
+        $supplier->title = Request()->input('title');
+        $supplier->description = Request()->input('description');
+        $supplier->contact = Request()->input('contact');
+        $supplier->email = Request()->input('email');
+        $supplier->landline = Request()->input('landline');
+        $supplier->mobile = Request()->input('mobile');
+        $supplier->address = Request()->input('address');
+        $supplier->save();
+
+        $allSuppliers = Supplier::all();
+
+        return redirect('console/supplier/index');
     }
 
     public function update(Request $request)
