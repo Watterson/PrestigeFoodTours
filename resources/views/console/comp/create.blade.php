@@ -37,7 +37,7 @@
         </div>
         <!-- Card Body -->
         <div class="card-body ">
-          <form method="POST" action="{{ route('login') }}">
+          <form method="POST" action="{{ route('create-comp') }}">
               @csrf
             <div class=" row">
 
@@ -69,36 +69,12 @@
                         @enderror
                     </div>
                 </div>
-
                 <div class="form-group row">
-                    <label for="category" class="col-lg-3 col-md-5 col-form-label text-md-right">Category</label>
-
-                    <div class="col-lg-8 col-md-6">
-                        <input id="category" type="text" class="form-control @error('category') is-invalid @enderror" name="category" value="{{ old('category') }}" required autocomplete="category" autofocus>
-
-                        @error('category')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+                  <label for="start" class="col-lg-3 col-md-5 col-form-label text-md-right">Runtime:</label>
+                  <div class="col-lg-8 col-md-6">
+                    <input class="form-control @error('start') is-invalid @enderror" type="text" name="datetimes" id="start" value="{{ old('start') }}" required autocomplete="start" autofocus>
+                  </div>
                 </div>
-
-                <div class="form-group row">
-                    <label for="people" class="col-lg-3 col-md-5 col-form-label text-md-right">Group Size</label>
-
-                    <div class="col-lg-8 col-md-6">
-                        <input id="people" type="text" class="form-control @error('people') is-invalid @enderror" name="people" value="{{ old('people') }}" required autocomplete="people" autofocus>
-
-                        @error('people')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-
-
               </div>
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
               <div class="form-group row">
@@ -106,10 +82,27 @@
 
                   <div class="col-lg-8 col-md-6">
                       <!-- <input id="prize" type="text" class="form-control @error('prize') is-invalid @enderror" name="prize" value="{{ old('prize') }}" required autocomplete="prize" autofocus> -->
-                      <select id="prize" class="form-control @error('prize') is-invalid @enderror" ame="prize" required autocomplete="prize" autofocus>
-                        <option>Default select</option>
+                      <select id="prize" class="selectpicker form-control @error('prize') is-invalid @enderror" ame="prize" required autocomplete="prize" autofocus multiple data-live-search="true">
+                        @foreach($prizes as $key => $prize)
+                          <option value="{{$prize->id}}">{{$prize->title}}</option>
+                        @endforeach
                       </select>
+
                       @error('prize')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
+                  </div>
+              </div>
+
+              <div class="form-group row">
+                  <label for="total-entries" class="col-lg-3 col-md-5 col-form-label text-md-right">Total Entries</label>
+
+                  <div class="col-lg-8 col-md-6">
+                      <input id="total-entries" type="text" class="form-control @error('total-entries') is-invalid @enderror" name="total-entries" value="{{ old('total-entries') }}" required autocomplete="total-entries" autofocus>
+
+                      @error('total-entries')
                           <span class="invalid-feedback" role="alert">
                               <strong>{{ $message }}</strong>
                           </span>
@@ -130,29 +123,6 @@
                       @enderror
                   </div>
               </div>
-
-              <div class="form-group row">
-                  <label for="entry-total" class="col-lg-3 col-md-5 col-form-label text-md-right">Entries</label>
-
-                  <div class="col-lg-8 col-md-6">
-                      <input id="entry-total" type="text" class="form-control @error('entry-total') is-invalid @enderror" name="entry-total" value="{{ old('entry-total') }}" required autocomplete="entry-total" autofocus>
-
-                      @error('entry-total')
-                          <span class="invalid-feedback" role="alert">
-                              <strong>{{ $message }}</strong>
-                          </span>
-                      @enderror
-                  </div>
-              </div>
-
-              <div class="form-group row">
-                <label for="expire" class="col-lg-3 col-md-5 col-form-label text-md-right">Expires</label>
-                <div class="col-lg-8 col-md-6">
-                  <input class="form-control @error('expire') is-invalid @enderror" type="datetime-local" id="expire" value="{{ old('entry-total') }}" required autocomplete="entry-total" autofocus>
-                </div>
-              </div>
-
-
               <div class="form-group row mb-0">
                   <div class="col-md-8 offset-lg-4 offset-md-5">
                       <button type="submit" class="btn btn-warning">

@@ -56,8 +56,6 @@ class SupplierController extends Controller
         $supplier->address = Request()->input('address');
         $supplier->save();
 
-        $allSuppliers = Supplier::all();
-
         return redirect('console/supplier/index');
     }
 

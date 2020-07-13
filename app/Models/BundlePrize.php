@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Prize extends Model
+class BundlePrize extends Model
 {
   /**
   * The table associated with the model.
   *
   * @var string
   */
- protected $table = 'prizes';
+ protected $table = 'bundleprizes';
  /**
    * The primary key associated with the table.
    *
@@ -24,7 +24,7 @@ class Prize extends Model
    * @var array
    */
   protected $fillable = [
-      'supplier_id', 'title', 'description', 'cost',
+      'bundle_id', 'prize_id',
   ];
   /**
    * Indicates if the model should be timestamped.
@@ -34,15 +34,17 @@ class Prize extends Model
   public $timestamps = true;
 
  /**
-  * Get the Bundle that the user ordered.
+  * Get the Question for the Property.
   */
+
+
+ public function prize()
+ {
+     return $this->hasMany('App\Models\Prize');
+ }
  public function bundle()
  {
-     return $this->Many('App\Models\Bundle');
+     return $this->hasMany('App\Models\Bundle');
  }
 
- public function supplier()
- {
-     return $this->hasOne('App\Models\Supplier');
- }
 }

@@ -57,8 +57,11 @@ Route::get('/console/users', 'Admin\UserController@index')->name('console-users'
 //Competitions
 Route::get('/console/competitions', 'Admin\CompetitionController@index')->name('console-comps');
 Route::get('/console/competitions/create', 'Admin\CompetitionController@create')->name('console-comps-create');
+Route::POST('/console/competitions/create', 'Admin\CompetitionController@postCreate')->name('create-comp');
 Route::get('/console/competitions/update', 'Admin\CompetitionController@update')->name('console-comps-update');
 Route::get('/console/competitions/prizes', 'Admin\PrizeController@index')->name('console-comps-prizes');
+Route::POST('/console/competitions/prizes', 'Admin\PrizeController@create')->name('create-prize');
+
 Route::get('/console/competitions/suppliers', 'Admin\SupplierController@index')->name('console-comps-suppliers');
 Route::POST('/console/competitions/suppliers', 'Admin\SupplierController@create')->name('create-supplier');
 
