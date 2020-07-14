@@ -70,9 +70,9 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                  <label for="start" class="col-lg-3 col-md-5 col-form-label text-md-right">Runtime:</label>
+                  <label for="datetimes" class="col-lg-3 col-md-5 col-form-label text-md-right">Runtime:</label>
                   <div class="col-lg-8 col-md-6">
-                    <input class="form-control @error('start') is-invalid @enderror" type="text" name="datetimes" id="start" value="{{ old('start') }}" required autocomplete="start" autofocus>
+                    <input class="form-control @error('datetimes') is-invalid @enderror" type="text" name="datetimes" id="start" value="{{ old('datetimes') }}" required autocomplete="start" autofocus>
                   </div>
                 </div>
               </div>
@@ -82,7 +82,7 @@
 
                   <div class="col-lg-8 col-md-6">
                       <!-- <input id="prize" type="text" class="form-control @error('prize') is-invalid @enderror" name="prize" value="{{ old('prize') }}" required autocomplete="prize" autofocus> -->
-                      <select id="prize" class="selectpicker form-control @error('prize') is-invalid @enderror" ame="prize" required autocomplete="prize" autofocus multiple data-live-search="true">
+                      <select id="prizes" class="selectpicker form-control @error('prize') is-invalid @enderror" name="prizes[]" required autocomplete="prizes" autofocus multiple data-live-search="true">
                         @foreach($prizes as $key => $prize)
                           <option value="{{$prize->id}}">{{$prize->title}}</option>
                         @endforeach

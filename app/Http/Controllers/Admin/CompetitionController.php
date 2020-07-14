@@ -78,46 +78,54 @@ class CompetitionController extends Controller
         ]);
     }
 
-    public function postCreate()
+    public function postCreate(Request $request)
     {
+        //validate the inputs from the create form
         $validatedData = $request->validate([
            'title' => 'required',
            'description' => 'required',
-           'start_date' => 'required',
-           'end_date' => 'required',
-           'total_entries' => 'required',
-           'total_cost' => 'required',
-           'total_profit' => 'required',
+           'datetimes' => 'required',
+           'total-entries' => 'required',
+           'entry-price' => 'required',
         ]);
 
-        $entryPrice = Request()->input('entry-price')
-        $totalEntries =Request()->input('total_entries');
-        $totalTake = $entryPrice*$totalEntries;
+        $entryPrice = Request()->input('entry-price');//retrieve entry-price value
+        $totalEntries =Request()->input('total-entries');//retrieve total-entries value
+        $totalTake = $entryPrice*$totalEntries;//total takings is equal to the entry price multiplied by the total entries)
+        $dateRange = Request()->input('datetimes');//retrieve total-entries value
+        list($start, $end) = explode("  - ", $dateRange);
+        //dd($totalTake);
+        // dd($start);
 
-        $competition = new Competition;
-        $competition->title = Request()->input('title');
-        $competition->description = Request()->input('description');
-        $competition->start_date  = Request()->input('start_date');
-        $competition->end_date  = Request()->input('end_date');
-        $competition->total_entries  = $totalEntries
+        $competition = new Bundle;//New entry in Competition table
+        $competition->title = Request()->input('title');//'title' coloumn is equal to the input 'title'
+        $competition->description = Request()->input('description');//'description' coloumn is equal to the input 'description'
+        $competition->start_date  = $start;
+        $competition->end_date  = $end;
+        $competition->total_entries  = $totalEntries;
         $competition->entry_price  = $entryPrice;
+        $competition->total_cost  = 0;//assign total cost of competition
+        $competition->total_profit  = 0;//assign total profit of competition
         $competition->save();
-
+        // dd($competition);
         //total cost of competition is total of all prizes
-        foreach ($prizes as $key => $prize) {
-          // code...
-        }
-
-        $competition->total_cost  = ;
-        $competition->total_profit  = Request()->input('total_profit');        $competition->save();
-        $competition->save();
-        $prizes = Request()->input('prizes');
-        foreach ($prizes as $key => $prize) {
-          $compPrizes = new BundlePrize;
-          $compPrizes->bundle_id = $competition->id;
-          $compPrizes->prize_id = $prize->id;
+        $prizeIDs = Request()->input('prizes');
+        //Foreach loop through id's of prizes selected
+        $totalCost = [];
+        foreach ($prizeIDs as $key => $id) {
+          $compPrizes = new BundlePrize;//create new record in BundlePrize table
+          $compPrizes->bundle_id = $competition->id;//assign competition id
+          $compPrizes->prize_id = $id;//assign prize id
           $compPrizes->save();
+          $prize = Prize::find($id);
+          $totalCost[$key] = $prize->cost;
         }
+        // dd(($totalCost));
+
+        $competition->total_cost  = array_sum($totalCost);//assign total cost of competition
+        $competition->total_profit  = $totalTake - array_sum($totalCost);
+        $competition->save();
+
         return redirect('console/competitions');
     }
 
