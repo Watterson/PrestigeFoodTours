@@ -38,6 +38,7 @@ class CompetitionController extends Controller
     {
       $prizes = Prize::all();
       $competitions = $this->competitionRepo->all();
+      //only need this for displaying individual prizes
       foreach ($competitions as $key => $comp) {
         $prizeArray = explode(',' , $comp->prizes );
         $titleArray = explode(',' , $comp->titles);

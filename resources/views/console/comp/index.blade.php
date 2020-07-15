@@ -118,7 +118,8 @@
         </div>
         <!-- Card Body -->
         <div class="card-body">
-          <table class="table table-sm table-light table-responsive">
+          <div class="table-responsive">
+            <table class="table table-light ">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -152,6 +153,7 @@
               @endforeach
             </tbody>
           </table>
+          </div>
         </div>
       </div>
     </div>
