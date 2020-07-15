@@ -8,7 +8,6 @@ header{
   display: block;
 }
 
-
 .navbar-wrapper {
     background-color: transparent;
     width: 100%;
@@ -145,7 +144,10 @@ header{
   padding-top: 7.5rem;
   padding-bottom: 7.5rem;
 }
-
+#all-comp {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
 .site-footer
 {
   background-color:#26272b;

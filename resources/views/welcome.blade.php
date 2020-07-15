@@ -32,56 +32,33 @@
                 <div class="container text-center my-3">
                   <h2 class="font-weight-light">Latest Competitions </h2>
                   <div class="row mx-auto my-auto">
-                      <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
+                      <div id="latestCarousel" class="carousel slide w-100" data-ride="carousel">
                           <div class="carousel-inner w-100" role="listbox">
-                              <div class="carousel-item active">
-                                  <div class="col-md-4">
-                                      <div class="card card-body">
-                                          <img class="img-fluid" src="http://placehold.it/380?text=1">
-                                      </div>
+
+                            @foreach($competitions as $key => $comp)
+                              @if($key < 1)
+                              <div class="carousel-item active ">
+                              @else
+                              <div class="carousel-item  ">
+                              @endif
+                                <div class="col-md-4">
+                                  <div class="card" >
+                                    <img class="card-img-top" src="http://placehold.it/380" alt="Card image cap">
+                                    <div class="card-body">
+                                      <h5 class="card-title">{{$comp->title}}</h5>
+                                      <p class="card-text">{{$comp->description}}</p>
+                                      <a href="#" class="btn btn-primary">Enter competition</a>
+                                    </div>
                                   </div>
+                                </div>
                               </div>
-                              <div class="carousel-item">
-                                  <div class="col-md-4">
-                                      <div class="card card-body">
-                                          <img class="img-fluid" src="http://placehold.it/380?text=2">
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="carousel-item">
-                                  <div class="col-md-4">
-                                      <div class="card card-body">
-                                          <img class="img-fluid" src="http://placehold.it/380?text=3">
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="carousel-item">
-                                  <div class="col-md-4">
-                                      <div class="card card-body">
-                                          <img class="img-fluid" src="http://placehold.it/380?text=4">
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="carousel-item">
-                                  <div class="col-md-4">
-                                      <div class="card card-body">
-                                          <img class="img-fluid" src="http://placehold.it/380?text=5">
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="carousel-item">
-                                  <div class="col-md-4">
-                                      <div class="card card-body">
-                                          <img class="img-fluid" src="http://placehold.it/380?text=6">
-                                      </div>
-                                  </div>
-                              </div>
+                            @endforeach
                           </div>
-                          <a class="carousel-control-prev w-auto" href="#recipeCarousel" role="button" data-slide="prev">
+                          <a class="carousel-control-prev w-auto" href="#latestCarousel" role="button" data-slide="prev">
                               <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
                               <span class="sr-only">Previous</span>
                           </a>
-                          <a class="carousel-control-next w-auto" href="#recipeCarousel" role="button" data-slide="next">
+                          <a class="carousel-control-next w-auto" href="#latestCarousel" role="button" data-slide="next">
                               <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
                               <span class="sr-only">Next</span>
                           </a>
@@ -142,12 +119,12 @@
                 <div class="container text-center my-3">
                   <h2 class="font-weight-light">Previous Winners</h2>
                   <div class="row mx-auto my-auto">
-                      <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
+                      <div id="winnerCarousel" class="carousel slide w-100" data-ride="carousel">
                           <div class="carousel-inner w-100" role="listbox">
                               <div class="carousel-item active">
                                   <div class="col-md-4">
                                       <div class="card card-body">
-                                          <img class="img-fluid" src="{{asset('./img/bluew.webp')}}">
+                                          <img class="img-fluid" src="http://placehold.it/380?text=2">
                                       </div>
                                   </div>
                               </div>
@@ -187,11 +164,11 @@
                                   </div>
                               </div>
                           </div>
-                          <a class="carousel-control-prev w-auto" href="#recipeCarousel" role="button" data-slide="prev">
+                          <a class="carousel-control-prev w-auto" href="#winnerCarousel" role="button" data-slide="prev">
                               <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
                               <span class="sr-only">Previous</span>
                           </a>
-                          <a class="carousel-control-next w-auto" href="#recipeCarousel" role="button" data-slide="next">
+                          <a class="carousel-control-next w-auto" href="#winnerCarousel" role="button" data-slide="next">
                               <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
                               <span class="sr-only">Next</span>
                           </a>
