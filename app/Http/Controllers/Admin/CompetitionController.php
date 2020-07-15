@@ -15,7 +15,7 @@ use App\Repositories\Admin\CompetitionRepo;
 class CompetitionController extends Controller
 {
     /**
-     * @var CompetitionRepository
+     * @var CompetitionRepo
      */
     private $competitionRepo;
     /**
@@ -23,10 +23,10 @@ class CompetitionController extends Controller
      *
      * @return void
      */
-    public function __construct()//CompetitionRepo $competitionRepo)
+    public function __construct(CompetitionRepo $competitionRepo)
     {
         $this->middleware('role:administrator');
-      //  $this->CompetitionRepo = $competitionRepo;
+        $this->competitionRepo = $competitionRepo;
     }
 
     /**
@@ -37,13 +37,17 @@ class CompetitionController extends Controller
     public function index()
     {
       $prizes = Prize::all();
-      $competitions = Bundle::all();//$this->$competitionRepo->consoleIndex();
-      $questions = Question::all();
+      $competitions = $this->competitionRepo->all();
+      foreach ($competitions as $key => $comp) {
+        $prizeArray = explode(',' , $comp->prizes );
+        $titleArray = explode(',' , $comp->titles);
+        $comp->prizeArray = $prizeArray;
+        $comp->titleArray = $titleArray;
+      }
+      // dd($competitions);
       return view('console/comp/index', [
-        'questions' =>$questions,
         'prizes' =>$prizes,
         'competitions' =>$competitions,
-
       ]);
     }
 

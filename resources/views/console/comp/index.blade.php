@@ -118,9 +118,40 @@
         </div>
         <!-- Card Body -->
         <div class="card-body">
-          <div class="chart-area">
-            <canvas id="myAreaChart"></canvas>
-          </div>
+          <table class="table table-sm table-light table-responsive">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Entry Price</th>
+                <th scope="col">Total Entries</th>
+                <th scope="col">Total Cost</th>
+                <th scope="col">Total Profit</th>
+                <th scope="col">Titles</th>
+
+
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($competitions as $key => $comp)
+              <tr>
+                <th scope="row">{{ ++$key }}</th>
+                <td>{{$comp->title}}</td>
+                <td>{{$comp->description}}</td>
+                <td>{{$comp->start_date}}</td>
+                <td>{{$comp->end_date}}</td>
+                <td>{{$comp->entry_price }}</td>
+                <td>{{$comp->total_entries}}</td>
+                <td>{{$comp->total_cost}}</td>
+                <td>{{$comp->total_profit}}</td>
+                <td>{{$comp->titles}}</td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
