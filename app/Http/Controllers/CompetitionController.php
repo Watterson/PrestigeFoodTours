@@ -43,4 +43,19 @@ class CompetitionController extends Controller
           'competitions' =>$competitions,
         ]);
     }
+
+    public function getComp($id)
+    {
+        $competition = $this->competitionRepo->getComp($id);
+        // dd($competition);
+
+          $prizeArray = explode(',' , $competition[0]->prizes );
+          $titleArray = explode(',' , $competition[0]->titles);
+          $competition[0]->prizeArray = $prizeArray;
+          $competition[0]->titleArray = $titleArray;
+
+        return view('competitions/main', [
+          'competition' =>$competition,
+        ]);
+    }
 }

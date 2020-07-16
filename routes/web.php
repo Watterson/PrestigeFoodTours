@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 |
 */
-// 
+//
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -45,6 +45,10 @@ Route::get('/fb', 'Social\FacebookController@index')->name('fb');
 Route::get('/tw', 'Social\TwitterController@index')->name('tw');
 Route::get('/insta', 'Social\InstagramController@index')->name('insta');
 Route::get('/link', 'Social\LinkedinController@index')->name('linkedin');
+
+//Competition page
+// Route::POST('/competitions/{$compId}', ['uses' => 'CompetitionController@getComp', 'as' => 'get-comp']);
+Route::get('/competitions/{compId}', 'CompetitionController@getComp')->name('get-comp');
 
 //Admin Console
 //User interface management

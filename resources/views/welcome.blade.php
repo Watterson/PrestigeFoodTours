@@ -43,11 +43,19 @@
                               @endif
                                 <div class="col-md-4">
                                   <div class="card" >
-                                    <img class="card-img-top" src="http://placehold.it/380" alt="Card image cap">
+                                    @if($comp->image)
+                                    <img class="card-img-top img-fluid" src="{{asset('/img/'.$comp->image)}}" alt="Card image cap">
+                                    @else
+                                    <img class="card-img-top img-fluid" src="{{asset('/img/big-windows.jpg')}}" alt="Card image cap">
+                                    @endif
                                     <div class="card-body">
                                       <h5 class="card-title">{{$comp->title}}</h5>
                                       <p class="card-text">{{$comp->description}}</p>
-                                      <a href="#" class="btn btn-primary">Enter competition</a>
+                                      <!-- <form action="{{route('get-comp', ['compId' => $comp->id ])}}" method="POST">
+                                        @csrf
+                                        <input class="btn btn-warning" type="submit" role="button" value="Enter competition"/>
+                                      </form> -->
+                                      <a href="{{route('get-comp', ['compId' => $comp->id ])}}" class="btn btn-warning">Enter competition</a>
                                     </div>
                                   </div>
                                 </div>
