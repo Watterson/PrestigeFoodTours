@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ui extends Model
 {
-  class Supplier extends Model
-  {
+  
     /**
     * The table associated with the model.
     *
@@ -38,6 +37,6 @@ class Ui extends Model
    /**
     * Get the Bundle that the user ordered.
     */
-   
+
 
 }

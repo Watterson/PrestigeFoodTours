@@ -47,15 +47,30 @@ class CompetitionController extends Controller
     public function getComp($id)
     {
         $competition = $this->competitionRepo->getComp($id);
-        // dd($competition);
 
           $prizeArray = explode(',' , $competition[0]->prizes );
           $titleArray = explode(',' , $competition[0]->titles);
           $competition[0]->prizeArray = $prizeArray;
           $competition[0]->titleArray = $titleArray;
-
+          // dd($competition);
+        $prizes = Prize::whereIn('id', $competition[0]->prizeArray)->get();
+        // dd($prizes);
+        $otherComps = $this->competitionRepo->otherComps($id);//returns 4 competitions that are not the one in veiw
+        // dd($otherComps);
         return view('competitions/main', [
-          'competition' =>$competition,
+          'comp' =>$competition,
+          'prizes' =>$prizes,
+          'otherComps' =>$otherComps,
         ]);
+    }
+
+    public function addToCart(Request $request)
+    {
+        Session::get('variableName');
+        $competition->id = $request->input('compId');
+        $competition->quantity = $request->input('quantity');
+
+        Session::put('cart', $value);
+        // Session::put('variableName', $value);
     }
 }

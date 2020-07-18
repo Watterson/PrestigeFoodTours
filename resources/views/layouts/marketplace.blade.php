@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link href="{{ asset('css/marketplace.css') }}" rel="stylesheet">
-
+    @yield('css-includes')
 </head>
 <body>
     <div id="app">
@@ -150,9 +150,6 @@
 
 <script src="{{ asset('js/app.js') }}" defer></script>
 <script src="{{ asset('js/marketplace.js') }}" defer></script>
-<script>
-
-</script>
 
 
 </html>
