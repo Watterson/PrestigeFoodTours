@@ -61,12 +61,21 @@ header{
      background-image: linear-gradient(
          rgba(0, 0, 0, 0.6),
          rgba(0, 0, 0, 0.6)
-       ), url("../img/cheers-1.webp");
+       ), url("../img/bar-1.webp");
      background-size: cover;
      background-position: 50%;
  }
  .draw-header {
      padding: 180px 0 140px;
+     background-image: linear-gradient(
+         rgba(0, 0, 0, 0.6),
+         rgba(0, 0, 0, 0.6)
+       ), url("../img/platting-1.webp");
+     background-size: cover;
+     background-position: 50%;
+ }
+ .single-comp-header {
+     padding: 140px 0 40px;
      background-image: linear-gradient(
          rgba(0, 0, 0, 0.6),
          rgba(0, 0, 0, 0.6)
