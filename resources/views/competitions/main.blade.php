@@ -36,19 +36,20 @@
                 </div>
                 <div class="col-lg-6 order-2">
                     <div class="product_description">
-                        <!-- <nav>
+                        <nav>
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Products</a></li>
-                                <li class="breadcrumb-item active">Accessories</li>
+                                <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{url('/competitions')}}">Competitions</a></li>
+                                <li class="breadcrumb-item active">{{$comp[0]->title}}</li>
                             </ol>
-                        </nav> -->
+                        </nav>
+                        <input type="hidden" id="competition-id" value="{{$comp[0]->id}}">
                         <div id="competition-title" class="product_name">{{$comp[0]->title}}</div>
                         <div class="product-rating"><span class="badge badge-success"><i class="fa fa-star"></i> 1 Michelin Star</span> <span class="rating-review">35 Ratings & 45 Reviews</span></div>
-                        <div> <span id="competition-price" class="product_price">&#163;{{$comp[0]->entry_price}}</span>  <span style='color:black'>per entry<span> </div>
+                        <div> <span id="entry-price" class="product_price">&#163;{{$comp[0]->entry_price}}</span>  <span style='color:black'>per entry<span> </div>
                         <div> <span class="product_saved">Total entries:</span> <span style='color:black'>{{$comp[0]->total_entries}}<span> </div>
                         <hr class="singleline">
-                        <div>
+                        <div >
                           <span class="product_info">{{$comp[0]->description}}<span>
                           <br>
                           <span class="product_info">Prizes:<span>
@@ -73,14 +74,14 @@
                                 </div>
                                 <div class="col-md-7"> </div>
                             </div> -->
-                            <div class="form-group col-6 mt-1">
-                              <label for="answer">Example multiple select Question</label>
+                            <!-- <div class="form-group col-6 mt-1">
+                              <label for="answer">Example Question:</label>
                               <select  class="form-control" id="answer">
-                                <option val="1">Answer 1</option>
-                                <option val="2">Answer 2</option>
-                                <option val="3">Answer 3</option>
+                                <option value="1">Answer 1</option>
+                                <option value="2">Answer 2</option>
+                                <option value="3">Answer 3</option>
                               </select>
-                            </div>
+                            </div> -->
 
                             <!-- <div class="row" style="margin-top: 15px;">
                                 <div class="col-xs-6" style="margin-left: 15px;"> <span class="product_options">RAM Options</span><br> <button class="btn btn-primary btn-sm">4 GB</button> <button class="btn btn-primary btn-sm">8 GB</button> <button class="btn btn-primary btn-sm">16 GB</button> </div>
@@ -91,22 +92,46 @@
                         <div class="order_info d-flex flex-row">
                             <form action="#">
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12 col-xs-12" style="margin-left: 13px;">
-                                <div class="product_quantity"> <span>QTY: </span> <input id="quantity_input" type="text" pattern="[0-9]*" value="1">
-                                    <div class="quantity_buttons">
-                                        <div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fas fa-chevron-up"></i></div>
-                                        <div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fas fa-chevron-down"></i></div>
-                                    </div>
-                                </div>
+                        <div id="payment-routes" class="row">
+                          @if(in_array($comp[0]->id, $compIds))
+                          <a role="button" id="goToCheckout" href="{{route('cart')}}" class="btn btn-success shop-button" >Check Out</a>
+                          @else
+                          <a role="button" id="goToCheckout" href="{{route('cart')}}" class="btn btn-success shop-button" style="display:none" >Check Out</a>
+
+                          <div class="form-group col-6 my-2">
+                            <label for="answer">Example Question:</label>
+                            <select  class="form-control" id="answer">
+                              <option disabled selected>Select Answer</option>
+                              <option value="false" >Answer 1</option>
+                              <option value="true">Answer 2</option>
+                              <option value="false">Answer 3</option>
+                            </select>
+                          </div>
+                          <div class="col-2 ">
+                            <i class="fas fa-check-circle py-5" id="correct" style="display:none"></i>
+                            <i class="far fa-times-circle py-5 " id="wrong" style="display:none"></i>
+                          </div>
+                            <div class="col-md-8 col-sm-12 col-xs-12 mb-2" >
+                              <div class="form-group ">
+                                <label for="quantity">Quantity:</label>
+                                  <select id="quantity" class="form-control">
+                                    @for($i = 1; $i < 11; $i++)
+                                    <option value="{{$i}}">{{$i}}</option>
+                                    @endfor
+                                  </select>
+                                </label>
+                              </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12 col-xs-12  text-center">
+                              <h3>Total:</h3>
+                              <h4 id="price" >&#163;{{$comp[0]->entry_price}}</h4>
                             </div>
                             <div class="col-md-6 col-sm-12 col-xs-12 text-center">
-                              <button type="button" id="addToCart" class="btn btn-warning shop-button">Add to Cart</button>
+
+                              <button type="button" id="addToCart" class="btn btn-warning shop-button">Add To Cart</button>
                               <button type="button" id="buyNow" class="btn btn-success shop-button">Buy Now</button>
-                            <!-- <div class="product_fav">
-                              <i class="fas fa-heart"></i>
-                            </div> -->
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -134,8 +159,14 @@
                 </div>
             </div>
             <div class="row row-underline">
-                <div class="col-md-6"> <span class=" deal-text">Other Competitions</span> </div>
-                <div class="col-md-6"> <a href="#" data-abc="true"> <span class="ml-auto view-all"></span> </a> </div>
+                <div class="col-md-6">
+                  <span class=" deal-text">Other Competitions</span>
+                </div>
+                <div class="col-md-6">
+                  <a href="" data-abc="true">
+                    <span class="ml-auto view-all"></span>
+                  </a>
+                </div>
             </div>
             <div class="row">
               @foreach($otherComps as $otherComp)
@@ -159,7 +190,7 @@
                           </div>
                         </div>
                   			<div class="action-wrap text-center ">
-                  				<button href="{{url('/competition/.$otherComp->id')}}" class="btn btn-warning btn-lg "> Veiw Competition </button>
+                  				<a href="{{url('/competitions/'.$otherComp->id)}}" class="btn btn-warning btn-md "> Veiw Competition </a>
                   				<div class="price-wrap h5">
                   				</div> <!-- price-wrap.// -->
                   			</div> <!-- action-wrap -->
@@ -171,4 +202,14 @@
              </div><!-- row // -->
       </div>
   </div>
+@endsection
+
+@section('js-includes')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/additional-methods.min.js" crossorigin="anonymous"></script>
+<script>
+
+const compIds = '<?php echo json_encode($compIds); ?>';
+
+</script>
 @endsection

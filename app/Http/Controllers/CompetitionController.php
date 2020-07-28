@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Repositories\Admin\CompetitionRepo;
 use App\Models\Prize;
+use Illuminate\Http\Request;
 
 class CompetitionController extends Controller
 {
@@ -28,7 +29,7 @@ class CompetitionController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         $competitions = $this->competitionRepo->all();
         //only need this for displaying individual prizes
@@ -39,12 +40,16 @@ class CompetitionController extends Controller
           $comp->titleArray = $titleArray;
         }
         // dd($competitions);
+        $cartSession = $request->session()->get('cart');
+         // dd($cartSession);
+
         return view('competitions/index', [
           'competitions' =>$competitions,
+          'cartSession' =>$cartSession,
         ]);
     }
 
-    public function getComp($id)
+    public function getComp($id, Request $request)
     {
         $competition = $this->competitionRepo->getComp($id);
 
@@ -57,10 +62,19 @@ class CompetitionController extends Controller
         // dd($prizes);
         $otherComps = $this->competitionRepo->otherComps($id);//returns 4 competitions that are not the one in veiw
         // dd($otherComps);
+        $cartSession = $request->session()->get('cart');
+         // dd($cartSession);
+         foreach ($cartSession as $key => $comp) {
+           $compIds[$key] = $comp['compId'];
+         }
+
         return view('competitions/main', [
           'comp' =>$competition,
           'prizes' =>$prizes,
           'otherComps' =>$otherComps,
+          'cartSession' =>$cartSession,
+          'compIds' =>$compIds,
+
         ]);
     }
 

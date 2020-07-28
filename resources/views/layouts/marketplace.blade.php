@@ -74,7 +74,7 @@
                   </div>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link shopping-cart " href="{{route('cart')}}"><i class="la la-shopping-cart"></i> &pound;0.00</a>
+                <a class="nav-link shopping-cart " href="{{route('cart')}}"><i class="fas fa-shopping-cart"></i> {{count($cartSession)}}</a>
                 </li>
 
               </ul>
@@ -145,10 +145,12 @@
     </div>
 </body>
 <!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 <script src="{{ asset('js/app.js') }}" defer></script>
+@yield('js-includes')
 <script src="{{ asset('js/marketplace.js') }}" defer></script>
 
 

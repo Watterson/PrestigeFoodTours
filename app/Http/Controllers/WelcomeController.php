@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Repositories\Admin\CompetitionRepo;
 use App\Models\Prize;
-
+use Illuminate\Http\Request;
 
 
 class WelcomeController extends Controller
@@ -29,7 +29,7 @@ class WelcomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         $prizes = Prize::all();
         $competitions = $this->competitionRepo->all();
@@ -40,10 +40,13 @@ class WelcomeController extends Controller
           $comp->prizeArray = $prizeArray;
           $comp->titleArray = $titleArray;
         }
+        $cartSession = $request->session()->get('cart');
+
         // dd($competitions);
         return view('welcome', [
           'prizes' =>$prizes,
           'competitions' =>$competitions,
+          'cartSession' =>$cartSession,
         ]);
     }
 }
